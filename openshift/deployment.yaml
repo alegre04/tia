@@ -1,0 +1,30 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: ${APP_NAME}
+spec:
+  replicas: 1
+  selector:
+    app: ${APP_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+    spec:
+      containers:
+      - name: ${APP_NAME}
+        image: ${IMAGE_NAME}:${IMAGE_TAG}
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        # ... otras configuraciones del contenedor ...
+  triggers:
+  - type: ConfigChange
+  - type: ImageChange
+    imageChangeParams:
+      automatic: true
+      containerNames:
+      - ${APP_NAME}
+      from:
+        kind: ImageStreamTag
+        name: ${APP_NAME}:latest
