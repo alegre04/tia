@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'gitlab-credentials', url: 'https://github.com/tu-usuario/mi-app-repo.git'
+                git credentialsId: 'gitlab-credentials', url: 'https://github.com/alegre04/tia.git'
             }
         }
 
